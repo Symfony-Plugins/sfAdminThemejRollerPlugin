@@ -1,45 +1,69 @@
 <?php
+
 class UIHelper 
 {
-	public static function addClasses($params,$extra = null)
+  /**
+   * Adds UI CSS classes
+   *
+   * @param array $params An array of parameters
+   * @param string $extra Extra CSS classes
+   * @return string
+   * @static
+   */
+	static public function addClasses(array $params, $extra = '')
 	{
-		$icon_class =  (isset($params['ui-icon']))?' sf_button-icon-left ':'';
-		$UIClasses = ' ' .$extra .' sf_button ' . $icon_class . ' ui-corner-all ';
-		$uparams = is_array($params['params']) ? $params['params'] : sfToolkit::stringToArray($params['params']);
-    if (isset($uparams['class']))
-		{
-			$uparams['class'] .= $UIClasses;
-		}
-		else
-		{
-			$uparams['class'] = $UIClasses;
-		}
-		return self::arrayToString($uparams);
+		$iconClass = (isset($params['ui-icon'])) ?' sf_button-icon-left ' : '';
+		$uiClasses = sprintf(' %s sf_button %s ui-corner-all', $extra, $iconClass);
+		$uiParams  = is_array($params['params']) ? $params['params'] : sfToolkit::stringToArray($params['params']);
+		$uiParams['class'] = $UIClasses;
+
+		return self::arrayToString($uiParams);
 	}
-	
-	public static function getClasses($params)
+
+  /**
+   * Returns the CSS classes to apply as a string
+   *
+   * @param string $params
+   * @return string
+   * @static
+   */
+	static public function getClasses($params)
 	{
 		$table = sfToolkit::stringToArray($params);
+
 		return $table['class'];
 	}
-	
-	public static function addIcon($params)
+
+  /**
+   * Adds an UI icon
+   *
+   * @param array $params An array of parameters
+   * @return string
+   * @static
+   */
+	static public function addIcon(array $params)
 	{
-		if (isset($params['ui-icon']) && $params['ui-icon'] != '')
+		if (!empty($params['ui-icon']))
 		{
-			return '<span class="ui-icon ui-icon-'.$params['ui-icon'].'"></span>';
+			return sprintf('<span class="ui-icon ui-icon-%s"></span>', $params['ui-icon']);
 		}
 	}
-	
-	public static function arrayToString($params)
+
+  /**
+   * Converts an associative array to a string
+   *
+   * @param array $params The associative array
+   * @return string
+   * @static
+   */
+	static public function arrayToString(array $params)
 	{
-		$tp = '';
-		
-		foreach ($params as $key => $val)
-		{
-			$tp .= "$key=$val ";
-		}
-		return $tp;
+	  $result = '';
+	  foreach ($params as $key => $value)
+	  {
+	    $result .= sprintf('%s=%s ', $key, $value);
+	  }
+
+    return $result;
 	}
-	
 }
