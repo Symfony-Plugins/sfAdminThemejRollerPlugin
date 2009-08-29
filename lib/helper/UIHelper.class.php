@@ -15,7 +15,7 @@ class UIHelper
 		$iconClass = (isset($params['ui-icon'])) ?' sf_button-icon-left ' : '';
 		$uiClasses = sprintf(' %s sf_button %s ui-corner-all', $extra, $iconClass);
 		$uiParams  = is_array($params['params']) ? $params['params'] : sfToolkit::stringToArray($params['params']);
-		$uiParams['class'] = $UIClasses;
+		$uiParams['class'] = $uiClasses;
 
 		return self::arrayToString($uiParams);
 	}
