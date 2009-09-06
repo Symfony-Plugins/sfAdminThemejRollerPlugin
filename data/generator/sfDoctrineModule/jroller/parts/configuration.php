@@ -60,6 +60,10 @@ class Base<?php echo ucfirst($this->getModuleName()) ?>GeneratorConfiguration ex
 <?php unset($this->config['filter']['class']) ?>
   }
 
+<?php //if (get_class($this) == 'jRollerDoctrineGenerator' && $this->getExtra('show')): ?>
+	<?php include dirname(__FILE__).'/showConfiguration.php' ?>
+<?php //endif; ?>
+
 <?php include dirname(__FILE__).'/filtersConfiguration.php' ?>
 
 <?php include dirname(__FILE__).'/paginationConfiguration.php' ?>
